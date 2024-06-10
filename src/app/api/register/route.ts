@@ -9,11 +9,29 @@ export async function POST(req: NextRequest) {
     await registerSchema.validate(body, { abortEarly: false });
 
     console.log(body);
-
     //* Destructure the body
-    const { email, nameAndSurname, password, confirmPassword } = body;
+    const { email, name, password, confirmPassword } = body;
 
-    return NextResponse.json({ message: "Kayıt başarılı" }, { status: 200 });
+    const response = await fetch("https://study.logiper.com/auth/register", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ name, email, password }),
+    });
+
+    if (!response.ok) {
+      return NextResponse.json(
+        { message: "Kayıt olurken hatayla karşılaşıldı" },
+        { status: 400 }
+      );
+    }
+
+    const res = NextResponse.json(
+      { message: "Kayıt başarılı" },
+      { status: 200 }
+    );
+    return res;
   } catch (error) {
     if (error instanceof yup.ValidationError) {
       return NextResponse.json({ errors: error.errors }, { status: 400 });

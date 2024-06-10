@@ -1,17 +1,48 @@
 import { NextRequest, NextResponse } from "next/server";
-import { registerSchema } from "@/lib/validations";
+import { loginSchema } from "@/lib/validations";
 import * as yup from "yup";
 
 export async function POST(req: NextRequest) {
   try {
     const body = await req.json();
     //* Validate the request body
-    await registerSchema.validate(body, { abortEarly: false });
+    await loginSchema.validate(body, { abortEarly: false });
 
     //* Destructure the body
     const { email, password } = body;
 
-    return NextResponse.json({ message: "Kayıt başarılı" }, { status: 200 });
+    const response = await fetch("https://study.logiper.com/auth/login", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ email, password }),
+    });
+
+    if (!response.ok) {
+      const errorData = await response.json();
+      return NextResponse.json(
+        { message: "Authentication failed", error: errorData },
+        { status: response.status }
+      );
+    }
+
+    const data = await response.json();
+
+    const res = NextResponse.json(
+      { message: "Giriş başarılı" },
+      { status: 200 }
+    );
+
+    res.cookies.set("token", data.data, {
+      httpOnly: true,
+      sameSite: "strict",
+      maxAge: 60 * 60 * 24 * 7, // 7 days
+      secure: true,
+      path: "/",
+    });
+
+    return res;
   } catch (error) {
     if (error instanceof yup.ValidationError) {
       return NextResponse.json({ errors: error.errors }, { status: 400 });
