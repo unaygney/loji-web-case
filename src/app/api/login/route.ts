@@ -1,6 +1,8 @@
 import { NextRequest, NextResponse } from "next/server";
 import { loginSchema } from "@/lib/validations";
 import * as yup from "yup";
+import { getJwtSecretKey } from "@/lib/auth";
+import { SignJWT } from "jose";
 
 export async function POST(req: NextRequest) {
   try {
@@ -20,9 +22,8 @@ export async function POST(req: NextRequest) {
     });
 
     if (!response.ok) {
-      const errorData = await response.json();
       return NextResponse.json(
-        { message: "Authentication failed", error: errorData },
+        { message: "Giriş Yaparken Hata Oluştu!" },
         { status: response.status }
       );
     }
@@ -33,7 +34,7 @@ export async function POST(req: NextRequest) {
       { message: "Giriş başarılı" },
       { status: 200 }
     );
-
+    //* set the cookie for backend authentication
     res.cookies.set("token", data.data, {
       httpOnly: true,
       sameSite: "strict",
@@ -42,15 +43,27 @@ export async function POST(req: NextRequest) {
       path: "/",
     });
 
+    //* set the cookie for frontend authentication
+    const authToken = await new SignJWT({ email: email })
+      .setProtectedHeader({ alg: "HS256" })
+      .setIssuedAt()
+      .setExpirationTime("2h")
+      .sign(getJwtSecretKey());
+
+    res.cookies.set("auth-token", authToken, {
+      httpOnly: true,
+      sameSite: "strict",
+      maxAge: 60 * 60 * 2, // 2 hours
+      path: "/",
+    });
+
     return res;
   } catch (error) {
     if (error instanceof yup.ValidationError) {
       return NextResponse.json({ errors: error.errors }, { status: 400 });
     }
+    console.error("error =>", error);
 
-    return NextResponse.json(
-      { message: "Bir hata oluştu", error },
-      { status: 400 }
-    );
+    return NextResponse.json({ message: "Bir hata oluştu" }, { status: 400 });
   }
 }
