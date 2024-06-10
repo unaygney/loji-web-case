@@ -15,14 +15,10 @@ import { Inputs } from "@/lib/definitions";
 import { loginSchema } from "@/lib/validations";
 //* Hooks
 import { useToast } from "@/components/ui/use-toast";
-import { Metadata } from "next";
+import { useRouter } from "next/navigation";
 
-export const metadata: Metadata = {
-  title: "Giriş Yap",
-  description: "Giriş yapın.",
-};
-
-export default function Login() {
+export default function LoginContainer() {
+  const router = useRouter();
   const { toast } = useToast();
   const {
     register,
@@ -46,6 +42,9 @@ export default function Login() {
         title: "Giriş Başarılı",
         description: "Anasayfaya yönlendiriliyorsunuz.",
       });
+      setTimeout(() => {
+        router.push("/");
+      }, 2000);
     } else {
       toast({
         title: "Giriş Başarısız",
@@ -57,7 +56,7 @@ export default function Login() {
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      className="w-full max-w-[350px] flex flex-col gap-4 px-8 md:px-0"
+      className="w-full max-w-[350px] flex flex-col gap-4 px-8 md:px-0  "
     >
       <div className="relative">
         <Label htmlFor="email">Email</Label>

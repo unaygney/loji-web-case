@@ -16,8 +16,10 @@ import { RegisterInputs } from "@/lib/definitions";
 import { registerSchema } from "@/lib/validations";
 //* Hooks
 import { useToast } from "@/components/ui/use-toast";
+import { useRouter } from "next/navigation";
 
 export default function RegisterContainer() {
+  const router = useRouter();
   const { toast } = useToast();
   const {
     register,
@@ -27,7 +29,7 @@ export default function RegisterContainer() {
 
   const onSubmit: SubmitHandler<Inputs> = async (data) => {
     console.log(data);
-    const response = await fetch("/api/login", {
+    const response = await fetch("/api/register", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -42,6 +44,9 @@ export default function RegisterContainer() {
         title: "Kayıt Başarılı",
         description: "Giriş sayfasına yönlendiriliyorsunuz.",
       });
+      setTimeout(() => {
+        router.push("/login");
+      }, 2000);
     } else {
       toast({
         title: "Giriş Başarısız",
@@ -64,15 +69,11 @@ export default function RegisterContainer() {
         )}
       </div>
       <div className="relative">
-        <Label htmlFor="email">Ad Soyad</Label>
-        <Input
-          {...register("nameAndSurname")}
-          id="nameAndSurname"
-          type="string"
-        />
-        {errors.nameAndSurname && (
+        <Label htmlFor="email">Ad</Label>
+        <Input {...register("name")} id="name" type="string" />
+        {errors.name && (
           <p className="text-red-500 text-xs absolute -bottom-5 left-0">
-            {errors.nameAndSurname.message}
+            {errors.name.message}
           </p>
         )}
       </div>
