@@ -4,7 +4,7 @@ import React from "react";
 export default function Logo() {
   return (
     <Image
-      src={"/lojiper.jpeg"}
+      src={"/lojiper.png"}
       alt="lojiper logo"
       width={48}
       height={48}
