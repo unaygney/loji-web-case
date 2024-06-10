@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { loginSchema } from "@/lib/validations";
 import * as yup from "yup";
-import { getJwtSecretKey } from "@/lib/auth";
+import { getSecretKey } from "@/lib/auth";
 import { SignJWT } from "jose";
 
 export async function POST(req: NextRequest) {
@@ -48,7 +48,7 @@ export async function POST(req: NextRequest) {
       .setProtectedHeader({ alg: "HS256" })
       .setIssuedAt()
       .setExpirationTime("2h")
-      .sign(getJwtSecretKey());
+      .sign(await getSecretKey());
 
     res.cookies.set("auth-token", authToken, {
       httpOnly: true,
