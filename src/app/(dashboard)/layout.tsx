@@ -4,7 +4,8 @@ import Logo from "@/components/logo";
 import { NavItem } from "@/components/nav-item";
 import "../globals.css";
 import { Wallet, CreditCard, LayoutDashboard } from "lucide-react";
-
+import Logout from "./logout";
+import { Toaster } from "@/components/ui/toaster";
 export default function DashboardLayout({
   children,
 }: {
@@ -57,10 +58,13 @@ export default function DashboardLayout({
                 <Logo />
                 <span className="">ACME</span>
               </Link>
+
+              <Logout />
             </header>
             {children}
           </div>
         </div>
+        <Toaster />
       </body>
     </html>
   );
