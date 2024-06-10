@@ -16,11 +16,14 @@ export const isDashboardPage = (url: string): Boolean => {
 
 //? This function returns the secret key for JWT
 export const getJwtSecretKey = (): Uint8Array => {
-  const secretKey = process.env.SECRET_KEY;
+  let secretKey: string | undefined = process.env.SECRET_KEY;
 
   if (!secretKey) {
     throw new Error("Secret key is not defined");
   }
+
+  console.log("SECRET_KEY type:", typeof secretKey);
+
   return new TextEncoder().encode(secretKey);
 };
 
