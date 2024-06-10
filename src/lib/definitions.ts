@@ -4,7 +4,7 @@ export interface Inputs {
 }
 export interface RegisterInputs {
   email: string;
-  nameAndSurname: string;
+  name: string;
   password: string;
   confirmPassword: string;
 }

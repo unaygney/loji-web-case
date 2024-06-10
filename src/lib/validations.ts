@@ -17,7 +17,7 @@ export const registerSchema = yup.object({
     .string()
     .email("Lütfen geçerli bir email adresi girin.")
     .required("Email alanı boş bırakılamaz."),
-  nameAndSurname: yup
+  name: yup
     .string()
     .required("Ad ve Soyad alanı boş bırakılamaz.")
     .min(3, "Ad Soyad en az 3 karakter olmalıdır."),
