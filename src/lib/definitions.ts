@@ -20,6 +20,16 @@ export interface UpdateFormData {
   amount: number;
 }
 
+export interface CreateDebt {
+  description?: string;
+  debtName: string;
+  lenderName: string;
+  debAmount: number;
+  interestRate: number;
+  paymentStart: Date;
+  installment: number;
+}
+
 export interface PaymentPlan {
   paymentAmount: number;
   paymentDate: string;

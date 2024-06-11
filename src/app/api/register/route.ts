@@ -8,7 +8,6 @@ export async function POST(req: NextRequest) {
     //* Validate the request body
     await registerSchema.validate(body, { abortEarly: false });
 
-    console.log(body);
     //* Destructure the body
     const { email, name, password, confirmPassword } = body;
 
