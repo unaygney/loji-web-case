@@ -21,16 +21,29 @@ export function formatDate(dateString: string): string {
   });
 }
 
-export function groupDebtsByMonth(debts: any) {
+export function groupDebtsByMonth(debts: any[]) {
   const groupedData = debts.reduce((acc: any, debt: any) => {
-    const paymentMonth = new Date(debt.paymentStart).toLocaleString("tr-TR", {
-      month: "long",
-      year: "numeric",
+    const paymentPlan = createPaymentPlan(
+      debt.debtAmount,
+      debt.amount,
+      debt.installment,
+      debt.paymentStart
+    );
+
+    paymentPlan.forEach((payment: any) => {
+      const paymentMonth = new Date(payment.paymentDate).toLocaleString(
+        "tr-TR",
+        {
+          month: "long",
+          year: "numeric",
+        }
+      );
+      if (!acc[paymentMonth]) {
+        acc[paymentMonth] = 0;
+      }
+      acc[paymentMonth] += payment.paymentAmount;
     });
-    if (!acc[paymentMonth]) {
-      acc[paymentMonth] = 0;
-    }
-    acc[paymentMonth] += debt.amount;
+
     return acc;
   }, {});
 
