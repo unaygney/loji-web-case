@@ -1,6 +1,6 @@
 "use server";
 import { jwtVerify, JWTPayload } from "jose";
-
+import { cookies } from "next/headers";
 //? This function checks if the page is  authentication pages
 export const isAuthPages = (url: string): Boolean => {
   const AUTH_PAGES = ["/login", "/register"];
@@ -41,3 +41,10 @@ export async function verifyJwtToken(
     return null;
   }
 }
+
+// export async function getToken(): Promise<string | null> {
+//   const cookieStore = cookies();
+//   const token = cookieStore.get("token")?.value;
+
+//   return token || null;
+// }
