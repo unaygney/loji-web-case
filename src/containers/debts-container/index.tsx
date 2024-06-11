@@ -1,21 +1,15 @@
 "use client";
 import React from "react";
 
+//* Components
 import { Button } from "@/components/ui/button";
 import TableSection from "./table-section";
-import { SubmitHandler, useForm } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers/yup";
-import { createDebtSchema } from "@/lib/validations";
-import { CreateDebt, UpdateFormData } from "@/lib/definitions";
-import { FORM_FIELDS } from "./table-section/constant";
 import { Label } from "@/components/ui/label";
-import { Input } from "@/components/ui/input";
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
-import { cn } from "@/lib/utils";
 import { CalendarIcon, Loader2 } from "lucide-react";
 import { Calendar } from "@/components/ui/calendar";
 import {
@@ -26,6 +20,22 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
+//* Hooks
+import { useRouter } from "next/navigation";
+import { useToast } from "@/components/ui/use-toast";
+
+//* Types
+import { createDebtSchema } from "@/lib/validations";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { CreateDebt } from "@/lib/definitions";
+
+//* Constants
+import { FORM_FIELDS } from "./table-section/constant";
+
+//* Libs
+import { SubmitHandler, useForm } from "react-hook-form";
+import { Input } from "@/components/ui/input";
+import { cn } from "@/lib/utils";
 
 export default function DebtsContainer({ debts }: { debts: any[] }) {
   return (
@@ -57,14 +67,14 @@ export default function DebtsContainer({ debts }: { debts: any[] }) {
 }
 
 function DialogForm() {
+  const { toast } = useToast();
+  const router = useRouter();
   const [date, setDate] = React.useState<Date | undefined>(new Date());
   const {
     register,
     handleSubmit,
     formState: { errors, isSubmitting },
   } = useForm<CreateDebt>({ resolver: yupResolver(createDebtSchema) });
-
-  console.log(errors);
 
   const onSubmit: SubmitHandler<CreateDebt> = async (data) => {
     const response = await fetch("/api/create-debt", {
@@ -76,7 +86,18 @@ function DialogForm() {
     });
 
     const result = await response.json();
-    console.log(result);
+    if (response.ok) {
+      toast({
+        title: "Borç Başarılı Bir Şekilde Oluşturuldu",
+      });
+      setTimeout(() => {
+        window.location.reload();
+      }, 2000);
+    } else {
+      toast({
+        title: "Borç Oluşturulamadı",
+      });
+    }
   };
 
   return (
