@@ -40,23 +40,20 @@ export default function DashboardLayout({
                     <Wallet size={16} />
                     Borçlar
                   </NavItem>
-
-                  <NavItem href="/payment-plan">
-                    <CreditCard size={16} />
-                    Ödeme Planı
-                  </NavItem>
                 </nav>
               </div>
             </div>
           </div>
-          <div className="flex flex-col">
+          <div className="flex flex-col ">
             <header className="flex h-14 lg:h-[60px] items-center gap-4 border-b bg-gray-100/40 px-6 dark:bg-gray-800/40 justify-between lg:justify-end">
               <Link
                 className="flex items-center gap-2 font-semibold lg:hidden"
                 href="/"
               >
                 <Logo />
-                <span className="">ACME</span>
+                <p className="text-[#245F8D] text-xl font-bold tracking-wider ">
+                  Loji<span className="text-[#2BA1D5]">per</span>
+                </p>
               </Link>
 
               <Logout />
