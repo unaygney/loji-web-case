@@ -8,6 +8,8 @@ export const metadata: Metadata = {
   description: "Lojiper Borç Ödeme Sistemi Anasayfası",
 };
 
+export const dynamic = "force-dynamic";
+
 export default async function Dashboard() {
   const data = await getAllDebts();
 

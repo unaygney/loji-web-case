@@ -5,8 +5,8 @@ import { Button } from "@/components/ui/button";
 import TableSection from "./table-section";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { debtFormSchema } from "@/lib/validations";
-import { UpdateFormData } from "@/lib/definitions";
+import { createDebtSchema } from "@/lib/validations";
+import { CreateDebt, UpdateFormData } from "@/lib/definitions";
 import { FORM_FIELDS } from "./table-section/constant";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
@@ -62,18 +62,21 @@ function DialogForm() {
     register,
     handleSubmit,
     formState: { errors, isSubmitting },
-  } = useForm<UpdateFormData>({ resolver: yupResolver(debtFormSchema) });
+  } = useForm<CreateDebt>({ resolver: yupResolver(createDebtSchema) });
 
-  const onSubmit: SubmitHandler<UpdateFormData> = async (data) => {
-    const response = fetch("/api/create-debt", {
+  console.log(errors);
+
+  const onSubmit: SubmitHandler<CreateDebt> = async (data) => {
+    const response = await fetch("/api/create-debt", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify(data),
     });
-    const res = (await response).json();
-    console.log(res);
+
+    const result = await response.json();
+    console.log(result);
   };
 
   return (
@@ -91,13 +94,13 @@ function DialogForm() {
               <Input
                 type={type}
                 id={name}
-                {...register(name as keyof UpdateFormData)}
+                {...register(name as keyof CreateDebt)}
                 placeholder={placeholder}
                 className="border border-gray-300 rounded-md p-2"
               />
-              {errors[name as keyof UpdateFormData] && (
+              {errors[name as keyof CreateDebt] && (
                 <span className="text-red-500">
-                  {errors[name as keyof UpdateFormData]?.message}
+                  {errors[name as keyof CreateDebt]?.message}
                 </span>
               )}
             </div>
@@ -134,16 +137,16 @@ function DialogForm() {
                             value: selectedDate,
                           },
                         };
-                        register(name as keyof UpdateFormData).onChange(event);
+                        register(name as keyof CreateDebt).onChange(event);
                       }
                     }}
                     initialFocus
                   />
                 </PopoverContent>
               </Popover>
-              {errors[name as keyof UpdateFormData] && (
+              {errors[name as keyof CreateDebt] && (
                 <span className="text-red-500">
-                  {errors[name as keyof UpdateFormData]?.message}
+                  {errors[name as keyof CreateDebt]?.message}
                 </span>
               )}
             </div>
