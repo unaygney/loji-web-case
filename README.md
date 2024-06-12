@@ -1,36 +1,65 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Borç Yönetim Sistemi Uygulaması
 
-## Getting Started
+## Proje Hakkında
 
-First, run the development server:
+Bu proje, kullanıcıların borçlarını yönetmelerine, ödeme planlarını görüntülemelerine ve borç detaylarını güncellemelerine olanak tanıyan bir borç yönetim sistemidir. Proje, React ve Next.js kullanılarak geliştirilmiştir ve veri doğrulama, form işleme ve API çağrılarını içermektedir.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+## Kullanılan Teknolojiler
+
+- **Next.js:** Projenin iskeletini oluşturan , React Tabanla Framework.
+- **TypeScript:** Tip güvenliği için typescript kullandım.
+- **Yup:** Form doğrulama ve şema tanımları için yup kullandım
+- **React Hook Form:** Form işleme ve yönetimi için
+- **Tailwind CSS:** Stil ve tasarım için.
+- **ui.shadcn** Componentler için shadcn'un komponentlerinden faydalandım.
+- **JWT:** Kimlik doğrulama ve yetkilendirme için.
+- **Jose** Tokenları imzalamak ve dogrulamak için kullandığım popüler bir paket
+
+## Proje Dosya Yapısı
+
+```
+loji-web-case/
+├── public/                 # Proje dosyasındaki statik dosyalar için
+├── src/
+│   ├── app/
+│   │   ├── api/           # API route sayfaları
+│   │   ├── (dashboard)/   # Dashboard sayfaları
+│   │   └── (login)/       # Login sayfaları
+│   ├── components/
+│   │   ├── ui/            # Componentler içeriyor
+│   │   └── icons/         # Iconları içeriyor
+│   ├── containers/        # Sayfa seviyesinde kullanılan bileşenlerin yer aldığı klasör
+│   ├── lib/
+│   │   ├── api.ts         # API çağrıları için
+│   │   ├── definitions.ts # Tip tanımlamaları
+│   │   ├── utils.ts       # Kullanılan yardımcı fonksiyonlar
+│   │   └── validations.ts # Form validasyonları için
+│   ├── middleware.ts      # Ara Yazılım / Token Kontrolu İçin
+├── README.md
+└── package.json
+
+
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### Önemli Dosya ve Klasörler
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- **components/ui:** Kullanıcı arayüz bileşenleri (butonlar, kartlar, dialoglar vb.).
+- **components/icons:** Proje içinde kullanılan ikonlar.
+- **containers:** Sayfa seviyesinde kullanılan bileşenlerin yer aldığı klasör.
+- **app:** Next.js sayfaları ve API rotalarının bulunduğu klasör.
+- **lib:** Yardımcı fonksiyonlar, tip tanımları ve validasyon şemalarının bulunduğu klasör.
+- **public:** Proje içinde kullanılan statik dosyalar (örneğin logo).
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+## Kurulum ve Başlatma
 
-## Learn More
+Projeyi localde çalıştırmak için:
 
-To learn more about Next.js, take a look at the following resources:
+```bash
+git clone https://github.com/unaygney/loji-web-case.git
+cd loji-web-case
+pnpm i
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Canlı Proje
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+Projenin canlı halini [buradan](https://loji-web-case.vercel.app/login) ulaşabilirsiniz.
