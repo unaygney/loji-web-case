@@ -25,7 +25,7 @@ export async function getAllDebts() {
 }
 
 //? This function fetches a single debt from the server
-export async function getDebtWithId({ id }: { id: string }) {
+export async function getDebtWithId(id: string) {
   try {
     let baseUrl = `https://study.logiper.com/finance/debt/${id}`;
     const cookieStore = cookies();
