@@ -50,7 +50,6 @@ export default function DebtContainer({ debt }: { debt: any }) {
     if (res?.status === "success") {
       toast({ title: "Ödeme Başarılı Bir Şekilde Yapıldı!" });
       setTimeout(() => window.location.reload(), 1500);
-      router.push("/");
     } else {
       toast({ title: "Ödeme yapılırken bir hata ile karşılaşıldı" });
       setTimeout(() => window.location.reload(), 1500);

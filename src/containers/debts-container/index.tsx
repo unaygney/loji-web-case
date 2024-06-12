@@ -176,6 +176,7 @@ function DialogForm() {
           return null;
         }
       })}
+      <p>Yıldızlı(*) Alanlar Zorunludur.</p>
       <Button disabled={isSubmitting} type="submit">
         {isSubmitting && <Loader2 className="animate-spin w-4 h-4 mr-2" />}Borç
         Oluştur

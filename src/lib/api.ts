@@ -39,7 +39,7 @@ export async function getDebtWithId(id: string) {
       },
     });
     const data = await debt.json();
-    return data.data;
+    return data;
   } catch (e) {
     console.error(e);
   }

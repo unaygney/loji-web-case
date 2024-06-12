@@ -1,7 +1,7 @@
 export const FORM_FIELDS = [
   {
     id: 0,
-    label: "Borç Adı",
+    label: "Borç Adı*",
     name: "debtName",
     type: "text",
     placeholder: "Borç Adı",
@@ -9,7 +9,7 @@ export const FORM_FIELDS = [
   },
   {
     id: 1,
-    label: "Borç Veren",
+    label: "Borç Veren*",
     name: "lenderName",
     type: "text",
     placeholder: "Borç Veren",
@@ -17,7 +17,7 @@ export const FORM_FIELDS = [
   },
   {
     id: 2,
-    label: "Borç Tutarı",
+    label: "Borç Tutarı*",
     name: "debAmount",
     type: "number",
     placeholder: "Borç Tutarı",
@@ -25,7 +25,7 @@ export const FORM_FIELDS = [
   },
   {
     id: 3,
-    label: "Faiz Oranı",
+    label: "Faiz Oranı*",
     name: "interestRate",
     type: "number",
     placeholder: "Faiz Oranı",
@@ -33,7 +33,7 @@ export const FORM_FIELDS = [
   },
   {
     id: 6,
-    label: "Taksit Sayısı",
+    label: "Taksit Sayısı*",
     name: "installment",
     type: "number",
     placeholder: "Taksit Sayısı",
@@ -41,7 +41,7 @@ export const FORM_FIELDS = [
   },
   {
     id: 5,
-    label: "Başlangıç Tarihi",
+    label: "Başlangıç Tarihi*",
     name: "paymentStart",
     type: "date",
     placeholder: "Başlangıç Tarihi",
