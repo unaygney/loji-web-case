@@ -36,10 +36,14 @@ import { FORM_FIELDS } from "./constant";
 //* Libraries
 import { Calendar as CalendarIcon } from "lucide-react";
 import { useForm, SubmitHandler } from "react-hook-form";
+import { Loader2 } from "lucide-react";
 //* Validations or Types
-import { UpdateFormData } from "@/lib/definitions";
-import { debtFormSchema } from "@/lib/validations";
+import { CreateDebt, UpdateFormData } from "@/lib/definitions";
+import { createDebtSchema, debtFormSchema } from "@/lib/validations";
 import { yupResolver } from "@hookform/resolvers/yup";
+import { getDebtWithId } from "@/lib/api";
+import { useToast } from "@/components/ui/use-toast";
+import { title } from "process";
 
 export default function TableSection({ debts }: { debts: any[] }) {
   return (
@@ -106,16 +110,62 @@ export default function TableSection({ debts }: { debts: any[] }) {
   );
 }
 
-function DialogForm({ id }: { id: string }) {
+const DialogForm: React.FC<DialogFormProps> = ({ id }) => {
+  const { toast } = useToast();
   const [date, setDate] = React.useState<Date | undefined>(new Date());
   const {
     register,
     handleSubmit,
-    formState: { errors },
-  } = useForm<UpdateFormData>({ resolver: yupResolver(debtFormSchema) });
+    setValue,
+    formState: { errors, isSubmitting },
+  } = useForm<CreateDebt>({
+    resolver: yupResolver(createDebtSchema),
+    defaultValues: async () => {
+      const formData = await getDebtWithId(id);
+      return {
+        ...formData,
+        paymentStart: new Date(formData.paymentStart),
+        debAmount: formData.debtAmount,
+      };
+    },
+  });
 
-  const onSubmit: SubmitHandler<UpdateFormData> = (data) => {
-    console.log(data);
+  React.useEffect(() => {
+    async function fetchData() {
+      const formData = await getDebtWithId(id);
+      console.log(formData);
+      Object.keys(formData).forEach((key) => {
+        if (key === "debtAmount") {
+          setValue("debAmount" as keyof CreateDebt, formData[key]);
+        } else {
+          setValue(key as keyof CreateDebt, formData[key]);
+        }
+      });
+      setDate(new Date(formData.paymentStart));
+    }
+    fetchData();
+  }, [id, setValue]);
+
+  const onSubmit: SubmitHandler<CreateDebt> = async (data) => {
+    const response = await fetch("/api/update-debt", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    });
+
+    if (!response.ok) {
+      toast({
+        title: "Borç Güncellenirken Hata Oluştu",
+      });
+    }
+    if (response.ok) {
+      toast({
+        title: "Borç Başarıyla Güncellendi",
+      });
+      setTimeout(() => window.location.reload(), 2000);
+    }
   };
 
   return (
@@ -133,13 +183,13 @@ function DialogForm({ id }: { id: string }) {
               <Input
                 type={type}
                 id={name}
-                {...register(name as keyof UpdateFormData)}
+                {...register(name as keyof CreateDebt)}
                 placeholder={placeholder}
-                className="border border-gray-300 rounded-md p-2"
+                className="text-black"
               />
-              {errors[name as keyof UpdateFormData] && (
+              {errors[name as keyof CreateDebt] && (
                 <span className="text-red-500">
-                  {errors[name as keyof UpdateFormData]?.message}
+                  {errors[name as keyof CreateDebt]?.message}
                 </span>
               )}
             </div>
@@ -176,16 +226,16 @@ function DialogForm({ id }: { id: string }) {
                             value: selectedDate,
                           },
                         };
-                        register(name as keyof UpdateFormData).onChange(event);
+                        register(name as keyof CreateDebt).onChange(event);
                       }
                     }}
                     initialFocus
                   />
                 </PopoverContent>
               </Popover>
-              {errors[name as keyof UpdateFormData] && (
+              {errors[name as keyof CreateDebt] && (
                 <span className="text-red-500">
-                  {errors[name as keyof UpdateFormData]?.message}
+                  {errors[name as keyof CreateDebt]?.message}
                 </span>
               )}
             </div>
@@ -194,7 +244,14 @@ function DialogForm({ id }: { id: string }) {
           return null;
         }
       })}
-      <Button type="submit">Güncelle</Button>
+      <Button disabled={isSubmitting} type="submit">
+        {isSubmitting && <Loader2 className="animate-spin w-4 h-4 mr-2" />}Borç
+        Güncelle
+      </Button>
     </form>
   );
-}
+};
+
+type DialogFormProps = {
+  id: string;
+};

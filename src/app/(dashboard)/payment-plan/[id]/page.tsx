@@ -7,7 +7,7 @@ export default async function PaymentPlan({
   params: { id: string };
 }) {
   const { id } = params;
-  const debt = await getDebtWithId({ id });
+  const debt = await getDebtWithId(id);
 
   return <div>PaymentPlan : {id}</div>;
 }
