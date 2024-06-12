@@ -1,9 +1,13 @@
 "use client";
 import React from "react";
+//* Components
 import { Button } from "@/components/ui/button";
+//* Hooks
 import { useToast } from "@/components/ui/use-toast";
 import { useRouter } from "next/navigation";
+//* Actions
 import { deleteCookie } from "@/lib/actions";
+
 export default function Logout() {
   const { toast } = useToast();
 
@@ -16,9 +20,7 @@ export default function Logout() {
         title: response.message,
       });
 
-      setTimeout(() => {
-        router.push("/login");
-      }, 3000);
+      router.push("/login");
     } catch (error) {
       toast({
         title: "Çıkış Yapılamadı Lütfen Sonra Tekrar Deneyin",

@@ -1,7 +1,6 @@
 "use server";
 import { cookies } from "next/headers";
 export async function deleteCookie() {
-  "use server";
   const token = cookies().get("token");
   const authToken = cookies().get("auth-token");
 

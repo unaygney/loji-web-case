@@ -6,7 +6,9 @@ export async function getAllDebts() {
     let baseUrl = "https://study.logiper.com/finance/debt";
     const cookieStore = cookies();
     const token = cookieStore.get("token")?.value;
-    if (!token) throw new Error("Token not found");
+    if (!token) {
+      console.error("token not found");
+    }
 
     const allDebts = await fetch(baseUrl, {
       method: "GET",
