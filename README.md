@@ -58,6 +58,10 @@ Projeyi localde çalıştırmak için:
 git clone https://github.com/unaygney/loji-web-case.git
 cd loji-web-case
 pnpm i
+
+Ayrıca root seviyede .env adlı bir dosya olusturulup,
+SECRET_KEY=gD0Ehlc99CJiHkWuFfa2ZlGWt6lJHWcxngawhW7S1GY=
+değeri verilmeli. Auth-Token adlı token'ı verify etmek için gereklidir.
 ```
 
 ## Canlı Proje
