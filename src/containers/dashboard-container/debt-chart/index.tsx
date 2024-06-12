@@ -13,7 +13,6 @@ import {
 
 export default function DebtChart({ debts }: { debts: any }) {
   const data = groupDebtsByMonth(debts);
-  console.log(data);
   return (
     <>
       <h2 className="text-xl leading-8 text-zinc-800 font-bold">

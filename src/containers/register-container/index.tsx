@@ -28,7 +28,6 @@ export default function RegisterContainer() {
   } = useForm<RegisterInputs>({ resolver: yupResolver(registerSchema) });
 
   const onSubmit: SubmitHandler<Inputs> = async (data) => {
-    console.log(data);
     const response = await fetch("/api/register", {
       method: "POST",
       headers: {

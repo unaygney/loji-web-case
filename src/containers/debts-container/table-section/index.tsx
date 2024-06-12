@@ -133,7 +133,6 @@ const DialogForm: React.FC<DialogFormProps> = ({ id }) => {
   React.useEffect(() => {
     async function fetchData() {
       const formData = await getDebtWithId(id);
-      console.log(formData);
       Object.keys(formData).forEach((key) => {
         if (key === "debtAmount") {
           setValue("debAmount" as keyof CreateDebt, formData[key]);
