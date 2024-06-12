@@ -1,6 +1,6 @@
 import { getDebtWithId } from "@/lib/api";
 import React from "react";
-
+import DebtContainer from "@/containers/debt-container";
 export default async function PaymentPlan({
   params,
 }: {
@@ -9,5 +9,5 @@ export default async function PaymentPlan({
   const { id } = params;
   const debt = await getDebtWithId(id);
 
-  return <div>PaymentPlan : {id}</div>;
+  return <DebtContainer debt={debt} />;
 }
