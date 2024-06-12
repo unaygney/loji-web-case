@@ -37,7 +37,7 @@ export async function verifyJwtToken(
     });
     return payload;
   } catch (e) {
-    console.log("token verification failed  ", e);
+    console.error("token verification failed  ", e);
     return null;
   }
 }
