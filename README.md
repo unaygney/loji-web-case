@@ -84,7 +84,8 @@ Proje kök dizininde `.env` adlı bir dosya oluşturun ve aşağıdaki değeri e
 ```env
 SECRET_KEY=gD0Ehlc99CJiHkWuFfa2ZlGWt6lJHWcxngawhW7S1GY=
 
+```
+
 ## Canlı Proje
 
 Projenin canlı halini [buradan](https://loji-web-case.vercel.app/login) ulaşabilirsiniz.
-```
