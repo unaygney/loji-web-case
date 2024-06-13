@@ -60,7 +60,12 @@ export default function RegisterContainer() {
     >
       <div className="relative">
         <Label htmlFor="email">Email</Label>
-        <Input {...register("email")} id="email" type="email" />
+        <Input
+          {...register("email")}
+          id="email"
+          type="email"
+          placeholder="Email Adresinizi Giriniz"
+        />
         {errors.email && (
           <p className="text-red-500 text-xs absolute -bottom-5 left-0">
             {errors.email.message}
@@ -69,7 +74,12 @@ export default function RegisterContainer() {
       </div>
       <div className="relative">
         <Label htmlFor="email">Ad</Label>
-        <Input {...register("name")} id="name" type="string" />
+        <Input
+          {...register("name")}
+          id="name"
+          type="string"
+          placeholder="Adınızı Giriniz"
+        />
         {errors.name && (
           <p className="text-red-500 text-xs absolute -bottom-5 left-0">
             {errors.name.message}
@@ -78,7 +88,12 @@ export default function RegisterContainer() {
       </div>
       <div className="relative">
         <Label htmlFor="password">Parola</Label>
-        <Input id="password" {...register("password")} type="password" />
+        <Input
+          id="password"
+          {...register("password")}
+          type="password"
+          placeholder="Şifrenizi Giriniz"
+        />
         {errors.password && (
           <p className="text-red-500 text-xs absolute -bottom-5 left-0">
             {errors.password.message}
@@ -91,6 +106,7 @@ export default function RegisterContainer() {
           id="confirmPassword"
           {...register("confirmPassword")}
           type="password"
+          placeholder="Parolanızı Tekrar Giriniz"
         />
         {errors.confirmPassword && (
           <p className="text-red-500 text-xs absolute -bottom-5 left-0">

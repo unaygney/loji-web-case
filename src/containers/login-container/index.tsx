@@ -60,7 +60,12 @@ export default function LoginContainer() {
     >
       <div className="relative">
         <Label htmlFor="email">Email</Label>
-        <Input {...register("email")} id="email" type="email" />
+        <Input
+          {...register("email")}
+          id="email"
+          type="email"
+          placeholder="Email Adresiniz"
+        />
         {errors.email && (
           <p className="text-red-500 text-xs absolute -bottom-5 left-0">
             {errors.email.message}
@@ -69,7 +74,12 @@ export default function LoginContainer() {
       </div>
       <div className="relative">
         <Label htmlFor="password">Parola</Label>
-        <Input id="password" {...register("password")} type="password" />
+        <Input
+          id="password"
+          {...register("password")}
+          type="password"
+          placeholder="Şifreniz"
+        />
         {errors.password && (
           <p className="text-red-500 text-xs absolute -bottom-5 left-0">
             {errors.password.message}
