@@ -86,6 +86,8 @@ SECRET_KEY=gD0Ehlc99CJiHkWuFfa2ZlGWt6lJHWcxngawhW7S1GY=
 
 ```
 
+</details>
+
 ## Canlı Proje
 
 Projenin canlı halini [buradan](https://loji-web-case.vercel.app/login) ulaşabilirsiniz.
