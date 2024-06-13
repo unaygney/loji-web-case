@@ -3,6 +3,11 @@ import React from "react";
 import DebtContainer from "@/containers/debt-container";
 import { redirect } from "next/navigation";
 
+export const metadata = {
+  title: "Ödeme Planı Sayfası",
+  description: "Ödeme Planı Sayfası",
+};
+
 export default async function PaymentPlan({
   params,
 }: {
