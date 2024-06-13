@@ -2,7 +2,9 @@ import React from "react";
 import Summary from "./summary";
 import DebtChart from "./debt-chart";
 import { NotFoundIcon } from "@/components/icons";
-
+import Link from "next/link";
+import { buttonVariants } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
 export default function DashboardContainer({ debts }: { debts: any }) {
   return (
     <main className="p-8">
@@ -12,6 +14,16 @@ export default function DashboardContainer({ debts }: { debts: any }) {
           <>
             <Summary debts={debts} />
             <DebtChart debts={debts} />
+            {/* Show the button only mobile screen */}
+            <Link
+              href="/debts"
+              className={cn(
+                buttonVariants({ variant: "default" }),
+                "lg:hidden"
+              )}
+            >
+              Borçlar Sayfasına Git
+            </Link>
           </>
         ) : (
           <div className="w-full h-full flex flex-col mt-10 items-center justify-center">
