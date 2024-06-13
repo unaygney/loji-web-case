@@ -52,18 +52,39 @@ loji-web-case/
 
 ## Kurulum ve Başlatma
 
-Projeyi localde çalıştırmak için:
+<details>
+<summary>Proje Kurulumu</summary>
 
-```bash
-git clone https://github.com/unaygney/loji-web-case.git
-cd loji-web-case
-pnpm i
+Projeyi yerel ortamda çalıştırmak için aşağıdaki adımları izleyin:
 
-Ayrıca root seviyede .env adlı bir dosya olusturulup,
+1. Depoyu klonlayın:
+   ```
+   git clone https://github.com/unaygney/loji-web-case.git
+   ```
+2. Proje dizinine gidin:
+   ```
+   cd loji-web-case
+   ```
+3. Gerekli paketleri yükleyin:
+   ```
+   npm install
+   ```
+4. Projeyi çalıştırın:
+   ```
+   npm run dev
+   ```
+
+</details>
+
+<details>
+<summary>Çevresel Değişkenler</summary>
+
+Proje kök dizininde `.env` adlı bir dosya oluşturun ve aşağıdaki değeri ekleyin:
+
+```env
 SECRET_KEY=gD0Ehlc99CJiHkWuFfa2ZlGWt6lJHWcxngawhW7S1GY=
-değeri verilmeli. Auth-Token adlı token'ı verify etmek için gereklidir.
-```
 
 ## Canlı Proje
 
 Projenin canlı halini [buradan](https://loji-web-case.vercel.app/login) ulaşabilirsiniz.
+```
