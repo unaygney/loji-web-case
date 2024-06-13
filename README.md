@@ -86,6 +86,8 @@ SECRET_KEY=gD0Ehlc99CJiHkWuFfa2ZlGWt6lJHWcxngawhW7S1GY=
 
 ```
 
+- Bu degişken kullanıcıya giriş anında verilen auth-token adlı tokenı verify etmek için gereklidir.
+
 </details>
 
 ## Canlı Proje
